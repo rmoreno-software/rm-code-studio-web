@@ -1,0 +1,48 @@
+---
+const steps = [
+    {
+    n: "01",
+    color: "border-t-brand text-brand",
+    title: "Diagnóstico inicial",
+    desc: "Una llamada breve, sin compromiso, para entender el problema real detrás de la necesidad.",
+  },
+  {
+    n: "02",
+    color: "border-t-cyan-400 text-cyan-500",
+    title: "Propuesta clara",
+    desc: "Alcance definido, plazos y presupuesto cerrado — sin sorpresas a mitad de proyecto.",
+  },
+  {
+    n: "03",
+    color: "border-t-orange-400 text-orange-500",
+    title: "Ejecución",
+    desc: "Avances visibles y comunicación constante durante todo el desarrollo.",
+  },
+  {
+    n: "04",
+    color: "border-t-emerald-400 text-emerald-500",
+    title: "Entrega y seguimiento",
+    desc: "Lanzamiento, documentación de lo entregado, y disponibilidad para ajustes posteriores.",
+  },
+]
+---
+
+<section id="proceso" class="px-6 py-24 bg-white border-y border-black/10">
+    <div class="max-w-5xl mx-auto flex flex-col gap-14">
+        <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight max-w-lg">
+            Cómo funciona el proceso
+        </h2>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {steps.map((step) => (
+                <div class={`flex flex-col gap-3 border-t-[3px] pt-4 ${step.color.split(" ")[0]}`}>
+                    <div class={`font-display text-3xl font-bold ${step.color.split(" ")[1]}`}>
+                        {step.n}
+                    </div>
+                    <h3 class="font-display text-base font-semibold">{step.title}</h3>
+                    <p class="text-sm text-ink/70">{step.desc}</p>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>

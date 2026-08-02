@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: oklch(0.5 0.13 265);
+  --color-brand-dark: oklch(0.42 0.14 265);
+  --color-surface: oklch(0.98 0.006 80);
+  --color-ink: oklch(0.2 0.012 80);
+
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+body {
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}

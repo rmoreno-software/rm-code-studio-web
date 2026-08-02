@@ -1,0 +1,112 @@
+---
+const WEB3FORMS_KEY = "01a46f83-40a0-4dc7-b26a-0dc2442d304d";
+---
+
+<section id="contacto" class="px-6 py-24 bg-ink text-surface">
+    <div class="max-w-5xl mx-auto grid lg:grid-cols-2 gap-16">
+        <div class="flex flex-col gap-5 justify-center">
+            <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight">
+                ¿Hablamos del proyecto?
+            </h2>
+            <p class="text-base text-surface/70 max-w-sm">
+                Cuenta qué se necesita y, sin compromiso, se propone cómo abordarlo y qué presupuesto tendría sentido.
+            </p>
+            <div class="flex items-center gap-5 mt-2">
+                <a
+                    href="#contacto-form"
+                    class="bg-surface text-ink px-7 py-4 rounded-xl font-semibold hover:bg-brand hover:text-surface transition-colors">
+                    Agenda una llamada gratuita
+                </a>
+            </div>
+            <p class="text-sm text-surface/60 mt-2">
+                O direcamente llama a 
+                <a href="tel:+34659705029" class="text-brand/90 hover:text-brand">+34 659 705 029</a>
+            </p>
+        </div>
+
+        <form
+            id="contacto-form"
+            action="https://api.web3forms.com/submit"
+            method="POST"
+            class="flex flex-col gap-4 bg-white/5 p-8 rounded-2xl"
+            >
+            <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
+            <input type="hidden" name="subject" value="Nuevo contacto desde la web" />
+
+            <input
+                type="text"
+                name="name"
+                placeholder="Nombre"
+                required
+                class="bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-sm placeholder:text-surface/50 focus:outline-none focus:border-brand"
+            />
+            <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                required
+                class="bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-sm placeholder:text-surface/50 focus:outline-none focus:border-brand"
+            />
+            <textarea
+                name="message"
+                placeholder="Cuéntame sobre tu proyecto"
+                rows="4"
+                required
+                class="bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-sm placeholder:text-surface/50 focus:outline-none focus:border-brand resize-y"
+            ></textarea>
+
+            <button
+                type="submit"
+                class="bg-brand text-surface py-3.5 rounded-lg font-semibold hover:bg-brand-dark transition-colors"
+            >
+                Enviar
+            </button>
+
+            <p id="form-status" class="text-sm text-center hidden"></p>
+        </form>
+    </div>
+</section>
+
+<script>
+    const form = document.getElementById('contacto-form') as HTMLFormElement | null;
+    const status = document.getElementById('form-status');
+
+    form?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+        submitButton.disabled = true;
+        submitButton.textContent = 'Enviando...';
+
+        try {
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: { Accept: 'application/json' },
+        });
+        const result = await response.json();
+
+        if (status) {
+            status.classList.remove('hidden');
+            if (result.success) {
+            status.textContent = '¡Mensaje enviado! Te responderé lo antes posible.';
+            status.classList.add('text-emerald-400');
+            form.reset();
+            } else {
+            status.textContent = 'Algo ha fallado. Prueba a escribir directamente al email.';
+            status.classList.add('text-red-400');
+            }
+        }
+        } catch {
+        if (status) {
+            status.classList.remove('hidden');
+            status.textContent = 'Algo ha fallado. Prueba a escribir directamente al email.';
+            status.classList.add('text-red-400');
+        }
+        } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Enviar';
+        }
+    });
+</script>
