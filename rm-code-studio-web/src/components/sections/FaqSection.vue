@@ -2,7 +2,7 @@
 import config from '@/config.js'
 import AppIcon from '@/components/ui/AppIcon.vue'
 import SectionEyebrow from '@/components/ui/SectionEyebrow.vue'
-import { FAQ } from '@/content/faq.js'
+import { FAQ, FAQ_SECTION } from '@/content/faq.js'
 import { SECTION_IDS } from '@/content/navigation.js'
 import { useAccordion } from '@/composables/useAccordion.js'
 
@@ -13,8 +13,8 @@ const { isOpen, toggle } = useAccordion({ initiallyOpen: [0], multiple: config.f
   <div class="container">
     <section :id="SECTION_IDS.faq" class="section-anchor faq">
       <div class="faq-intro">
-        <SectionEyebrow data-reveal="up">06 — FAQ</SectionEyebrow>
-        <h2 data-reveal="up" data-delay="80" class="section-title faq-title">Preguntas frecuentes</h2>
+        <SectionEyebrow data-reveal="up">{{ FAQ_SECTION.eyebrow }}</SectionEyebrow>
+        <h2 data-reveal="up" data-delay="80" class="section-title faq-title">{{ FAQ_SECTION.title }}</h2>
       </div>
 
       <div data-reveal="up" data-delay="120" class="faq-list">

@@ -1,6 +1,6 @@
 <script setup>
 import DeviceMockup from '@/components/graphics/DeviceMockup.vue'
-import { DEVICES } from '@/content/devices.js'
+import { DEVICES, DEVICES_SECTION } from '@/content/devices.js'
 
 const REVEAL_STAGGER_MS = 80
 </script>
@@ -9,10 +9,8 @@ const REVEAL_STAGGER_MS = 80
   <section class="devices-band">
     <div class="container devices-inner">
       <div class="devices-header">
-        <h2 data-reveal="up" class="section-title devices-title">Una solución. Todas las pantallas.</h2>
-        <p data-reveal="up" data-delay="100" class="devices-intro">
-          Ordenador, web, móvil, tablet, reloj o máquina: una sola persona para todo el ecosistema.
-        </p>
+        <h2 data-reveal="up" class="section-title devices-title">{{ DEVICES_SECTION.title }}</h2>
+        <p data-reveal="up" data-delay="100" class="devices-intro">{{ DEVICES_SECTION.intro }}</p>
       </div>
 
       <div class="devices">

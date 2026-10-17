@@ -2,6 +2,7 @@
 import { CONTACT } from '@/content/contact.js'
 import { LEGAL_LINKS } from '@/content/navigation.js'
 import BrandLogo from '@/components/ui/BrandLogo.vue'
+import { SITE_TEXT } from '@/content/site.js'
 
 const currentYear = new Date().getFullYear()
 </script>
@@ -13,14 +14,14 @@ const currentYear = new Date().getFullYear()
         <span class="footer-brand">
           <BrandLogo :size="20" class="footer-brand-mark" /> Roger Moreno
         </span>
-        <span class="footer-tagline">Consultoría tecnológica y desarrollo de software</span>
+        <span class="footer-tagline">{{ SITE_TEXT.tagline }}</span>
       </div>
       <div class="footer-links">
         <a v-for="link in LEGAL_LINKS" :key="link.label" :href="link.href">{{ link.label }}</a>
       </div>
     </div>
     <div class="container">
-      <p class="footer-copyright">© {{ currentYear }} {{ CONTACT.businessName }}. Todos los derechos reservados.</p>
+      <p class="footer-copyright">© {{ currentYear }} {{ CONTACT.businessName }}. {{ SITE_TEXT.rights }}</p>
     </div>
   </footer>
 </template>

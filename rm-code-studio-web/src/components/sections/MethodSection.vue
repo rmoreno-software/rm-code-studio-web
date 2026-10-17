@@ -1,8 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import SectionEyebrow from '@/components/ui/SectionEyebrow.vue'
-import { STEPS, ENGAGEMENT_MODELS } from '@/content/method.js'
-import { CONTACT } from '@/content/contact.js'
+import { STEPS, ENGAGEMENT_MODELS, METHOD_SECTION } from '@/content/method.js'
 import { SECTION_IDS } from '@/content/navigation.js'
 import { useAutoCycle } from '@/composables/useAutoCycle.js'
 import { useFlashOnChange } from '@/composables/useFlashOnChange.js'
@@ -27,8 +26,8 @@ function selectStep(index) {
 <template>
   <div class="container">
     <section :id="SECTION_IDS.method" class="section-anchor method">
-      <SectionEyebrow data-reveal="up">03 — Cómo trabajo</SectionEyebrow>
-      <h2 data-reveal="up" data-delay="80" class="section-title">Un método claro, sin sorpresas</h2>
+      <SectionEyebrow data-reveal="up">{{ METHOD_SECTION.eyebrow }}</SectionEyebrow>
+      <h2 data-reveal="up" data-delay="80" class="section-title">{{ METHOD_SECTION.title }}</h2>
 
       <div data-reveal="up" data-delay="160" class="step-tabs">
         <button
@@ -53,7 +52,7 @@ function selectStep(index) {
         </div>
       </div>
 
-      <h3 data-reveal="up" class="engagement-heading">Modalidades de colaboración</h3>
+      <h3 data-reveal="up" class="engagement-heading">{{ METHOD_SECTION.engagementTitle }}</h3>
       <div class="engagement-grid">
         <div
           v-for="(model, index) in ENGAGEMENT_MODELS"
@@ -69,7 +68,7 @@ function selectStep(index) {
           <p class="engagement-text">{{ model.description }}</p>
         </div>
       </div>
-      <p class="method-note">Trabajo en remoto y presencialmente en {{ CONTACT.area }}.</p>
+      <p class="method-note">{{ METHOD_SECTION.note }}</p>
     </section>
   </div>
 </template>

@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import config from '@/config.js'
 import { useCountUp } from '@/composables/useCountUp.js'
 import { formatCount } from '@/utils/format.js'
+import { STATS_LABELS } from '@/content/hero.js'
 
 // El tiempo de respuesta "cuenta hacia atrás" desde COUNTDOWN_FROM_HOURS hasta RESPONSE_HOURS
 const RESPONSE_HOURS = 24
@@ -18,15 +19,15 @@ const responseHours = computed(() =>
 const stats = computed(() => [
   {
     value: `+${formatCount(config.years, progress.value)}`,
-    label: 'Años de experiencia en entornos profesionales'
+    label: STATS_LABELS.years
   },
   {
     value: `+${formatCount(config.projects, progress.value)}`,
-    label: 'Proyectos implantados'
+    label: STATS_LABELS.projects
   },
   {
     value: `<${responseHours.value} h`,
-    label: 'Tiempo de respuesta en días laborables'
+    label: STATS_LABELS.response
   }
 ])
 </script>

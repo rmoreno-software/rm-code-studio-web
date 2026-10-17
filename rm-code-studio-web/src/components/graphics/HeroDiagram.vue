@@ -3,6 +3,7 @@
 // por la que circula un paquete (animación SVG nativa).
 import { ref, onMounted } from 'vue'
 import { isMotionEnabled } from '@/utils/motion.js'
+import { HERO_DIAGRAM } from '@/content/hero.js'
 
 const NODE_SIZE = 64
 const LABEL_OFFSET = { x: 8, y: 54 }
@@ -11,10 +12,10 @@ const SYSTEMS = [
   { label: 'ERP', x: 8, y: 8, path: 'M40 40H200V160', duration: '3s', delay: '0s' },
   { label: 'WEB', x: 248, y: 8, path: 'M280 40V160', duration: '2.2s', delay: '-0.6s' },
   { label: 'CRM', x: 408, y: 88, path: 'M440 120V200H320', duration: '2.8s', delay: '-1.4s' },
-  { label: 'IA', x: 8, y: 248, path: 'M40 280H160', duration: '2s', delay: '-0.3s' },
+  { label: HERO_DIAGRAM.ai, x: 8, y: 248, path: 'M40 280H160', duration: '2s', delay: '-0.3s' },
   { label: 'WHATSAPP', x: 408, y: 328, path: 'M440 360H380V280H320', duration: '3.2s', delay: '-2s' },
   { label: 'APP', x: 88, y: 408, path: 'M120 440V380H200V320', duration: '2.6s', delay: '-1s' },
-  { label: 'MÁQUINA', x: 328, y: 408, path: 'M360 440V400H280V320', duration: '2.4s', delay: '-1.8s' }
+  { label: HERO_DIAGRAM.machine, x: 328, y: 408, path: 'M360 440V400H280V320', duration: '2.4s', delay: '-1.8s' }
 ]
 
 const diagram = ref(null)
@@ -46,8 +47,8 @@ onMounted(() => {
         <animate attributeName="stroke-opacity" values="0;1;0" dur="2.4s" repeatCount="indefinite" />
       </rect>
       <rect x="160" y="160" width="160" height="160" fill="var(--color-accent)" />
-      <text x="174" y="282" fill="var(--color-bg)" font-size="24" font-weight="800">TU</text>
-      <text x="174" y="306" fill="var(--color-bg)" font-size="24" font-weight="800">NEGOCIO</text>
+      <text x="174" y="282" fill="var(--color-bg)" font-size="24" font-weight="800">{{ HERO_DIAGRAM.center[0] }}</text>
+      <text x="174" y="306" fill="var(--color-bg)" font-size="24" font-weight="800">{{ HERO_DIAGRAM.center[1] }}</text>
     </svg>
   </div>
 </template>

@@ -2,7 +2,7 @@
 import AppIcon from '@/components/ui/AppIcon.vue'
 import BulletList from '@/components/ui/BulletList.vue'
 import SectionHeader from '@/components/ui/SectionHeader.vue'
-import { SERVICES } from '@/content/services.js'
+import { SERVICES, SERVICES_SECTION } from '@/content/services.js'
 import { PRIMARY_CTA, SECTION_IDS } from '@/content/navigation.js'
 import { padNumber } from '@/utils/format.js'
 
@@ -13,9 +13,8 @@ const REVEAL_STAGGER_MS = 100
 <template>
   <div class="container">
     <section :id="SECTION_IDS.services" class="section-anchor services">
-      <SectionHeader eyebrow="01 — Servicios" title="Qué puedo hacer por tu empresa">
-        Cada empresa tiene problemas distintos, pero casi todos se resuelven con la misma receta: entender bien
-        el negocio, elegir la tecnología adecuada y ponerla en marcha sin fricciones.
+      <SectionHeader :eyebrow="SERVICES_SECTION.eyebrow" :title="SERVICES_SECTION.title">
+        {{ SERVICES_SECTION.intro }}
       </SectionHeader>
 
       <div class="service-grid">
@@ -37,8 +36,8 @@ const REVEAL_STAGGER_MS = 100
       </div>
 
       <p data-reveal="up" class="services-more">
-        ¿No ves tu caso en la lista? Probablemente también tenga solución.
-        <a :href="PRIMARY_CTA.href">Escríbeme →</a>
+        {{ SERVICES_SECTION.more }}
+        <a :href="PRIMARY_CTA.href">{{ SERVICES_SECTION.moreLink }}</a>
       </p>
     </section>
   </div>

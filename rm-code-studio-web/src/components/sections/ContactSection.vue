@@ -3,14 +3,18 @@ import { ref } from 'vue'
 import AppIcon from '@/components/ui/AppIcon.vue'
 import SectionEyebrow from '@/components/ui/SectionEyebrow.vue'
 import { LEGAL_LINKS, SECTION_IDS } from '@/content/navigation.js'
-import { CONTACT, CONTACT_DETAILS } from '@/content/contact.js'
+import { CONTACT, CONTACT_DETAILS, CONTACT_SECTION as TEXT } from '@/content/contact.js'
+import { LOCALE } from '@/i18n.js'
 
+// Los `name` de los campos se quedan en castellano para que todos los correos lleguen igual
 const FORM_FIELDS = [
-  { id: 'f-nombre', name: 'nombre', label: 'Nombre', autocomplete: 'name', required: true },
-  { id: 'f-empresa', name: 'empresa', label: 'Empresa', autocomplete: 'organization' },
-  { id: 'f-email', name: 'email', label: 'Email', type: 'email', autocomplete: 'email', required: true },
-  { id: 'f-tel', name: 'telefono', label: 'Teléfono (opcional)', type: 'tel', autocomplete: 'tel' }
+  { id: 'f-nombre', name: 'nombre', label: TEXT.fields.name, autocomplete: 'name', required: true },
+  { id: 'f-empresa', name: 'empresa', label: TEXT.fields.company, autocomplete: 'organization' },
+  { id: 'f-email', name: 'email', label: TEXT.fields.email, type: 'email', autocomplete: 'email', required: true },
+  { id: 'f-tel', name: 'telefono', label: TEXT.fields.phone, type: 'tel', autocomplete: 'tel' }
 ]
+
+const EMAIL_SUBJECT = `Nueva consulta desde la web (${LOCALE.toUpperCase()})`
 
 const isSent = ref(false)
 const isSending = ref(false)
@@ -33,7 +37,7 @@ async function handleSubmit(event) {
     form.reset()
     isSent.value = true
   } catch {
-    errorMessage.value = `No se ha podido enviar. Inténtalo de nuevo o escríbeme a ${CONTACT.email}.`
+    errorMessage.value = TEXT.error
   } finally {
     isSending.value = false
   }
@@ -48,12 +52,9 @@ function resetForm() {
   <div class="container">
     <section :id="SECTION_IDS.contact" class="section-anchor contact">
       <div class="contact-intro">
-        <SectionEyebrow data-reveal="up">07 — Contacto</SectionEyebrow>
-        <h2 data-reveal="up" data-delay="80" class="section-title contact-title">¿Hablamos de tu proyecto?</h2>
-        <p data-reveal="up" data-delay="160" class="contact-lead">
-          Cuéntame qué necesitas o qué problema quieres resolver. Te respondo en menos de 24 horas laborables y
-          la primera reunión no tiene coste ni compromiso.
-        </p>
+        <SectionEyebrow data-reveal="up">{{ TEXT.eyebrow }}</SectionEyebrow>
+        <h2 data-reveal="up" data-delay="80" class="section-title contact-title">{{ TEXT.title }}</h2>
+        <p data-reveal="up" data-delay="160" class="contact-lead">{{ TEXT.lead }}</p>
         <dl data-reveal="up" data-delay="220" class="contact-details">
           <template v-for="detail in CONTACT_DETAILS" :key="detail.label">
             <dt>{{ detail.label }}</dt>
@@ -70,12 +71,12 @@ function resetForm() {
           <span class="contact-success-icon">
             <AppIcon name="check" :size="32" :stroke-width="2.5" />
           </span>
-          <p class="contact-success-message">Gracias. He recibido tu mensaje y te contestaré muy pronto.</p>
-          <button type="button" class="btn btn-ghost contact-reset" @click="resetForm">Enviar otra consulta</button>
+          <p class="contact-success-message">{{ TEXT.success }}</p>
+          <button type="button" class="btn btn-ghost contact-reset" @click="resetForm">{{ TEXT.sendAnother }}</button>
         </div>
 
         <form v-else class="contact-form" @submit.prevent="handleSubmit">
-          <input type="hidden" name="_subject" value="Nueva consulta desde la web">
+          <input type="hidden" name="_subject" :value="EMAIL_SUBJECT">
           <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none">
 
           <div class="contact-fields">
@@ -92,16 +93,16 @@ function resetForm() {
             </div>
           </div>
           <div class="field">
-            <label for="f-msg">¿En qué puedo ayudarte?</label>
+            <label for="f-msg">{{ TEXT.fields.message }}</label>
             <textarea id="f-msg" class="input contact-message" name="mensaje" rows="5" required></textarea>
           </div>
           <label class="consent">
             <input type="checkbox" name="consentimiento" value="Acepta la política de privacidad" required>
-            <span>He leído y acepto la <a :href="LEGAL_LINKS.privacy.href">política de privacidad</a>.</span>
+            <span>{{ TEXT.consentBefore }}<a :href="LEGAL_LINKS.privacy.href">{{ TEXT.consentLink }}</a>.</span>
           </label>
           <p v-if="errorMessage" class="contact-error" role="alert">{{ errorMessage }}</p>
           <button type="submit" class="btn btn-primary btn-cta contact-submit" :disabled="isSending">
-            {{ isSending ? 'Enviando…' : 'Enviar consulta' }} <AppIcon name="arrow" :size="18" />
+            {{ isSending ? TEXT.sending : TEXT.submit }} <AppIcon name="arrow" :size="18" />
           </button>
         </form>
       </div>

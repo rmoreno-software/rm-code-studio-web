@@ -3,7 +3,9 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 import AppIcon from '@/components/ui/AppIcon.vue'
 import { NAV_LINKS, PRIMARY_CTA } from '@/content/navigation.js'
 import { useScrollProgress } from '@/composables/useScrollProgress.js'
-import BrandLogo from '@/components/ui/BrandLogo.vue'
+import SiteBrand from '@/components/layout/SiteBrand.vue'
+import LanguageSwitcher from '@/components/layout/LanguageSwitcher.vue'
+import { SITE_TEXT } from '@/content/site.js'
 
 // Debe coincidir con el @media del <style> de abajo
 const COMPACT_MENU_QUERY = '(max-width: 1023px)'
@@ -40,11 +42,7 @@ onBeforeUnmount(() => {
 
 <template>
   <nav class="nav site-nav" :class="{ 'is-open': isMenuOpen }">
-    <span class="nav-brand brand">
-      <a href="#" class="nav-brand brand">
-        <BrandLogo :size="22" class="brand-mark" />Roger Moreno
-      </a>
-    </span>
+    <SiteBrand />
 
     <button
       type="button"
@@ -53,13 +51,14 @@ onBeforeUnmount(() => {
       :aria-expanded="isMenuOpen"
       @click="toggleMenu"
     >
-      <span class="sr-only">{{ isMenuOpen ? 'Cerrar menú' : 'Abrir menú' }}</span>
+      <span class="sr-only">{{ isMenuOpen ? SITE_TEXT.closeMenu : SITE_TEXT.openMenu }}</span>
       <AppIcon :name="isMenuOpen ? 'close' : 'menu'" :size="26" />
     </button>
 
     <!-- En escritorio sus enlaces se colocan directamente en la barra (display: contents) -->
     <div id="site-menu" class="site-menu" @click="closeMenu">
       <a v-for="link in NAV_LINKS" :key="link.href" :href="link.href">{{ link.label }}</a>
+      <LanguageSwitcher page="home" class="site-languages" />
       <a class="btn btn-primary" :href="PRIMARY_CTA.href">{{ PRIMARY_CTA.label }}</a>
     </div>
 
@@ -77,14 +76,6 @@ onBeforeUnmount(() => {
   padding-inline: clamp(20px, 5vw, 72px);
   background: var(--color-bg);
 }
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.brand-mark { color: var(--color-accent); }
 
 .site-menu { display: contents; }
 
@@ -138,6 +129,8 @@ onBeforeUnmount(() => {
     font-size: 20px;
     border-bottom: 2px solid var(--color-divider);
   }
+
+  .site-menu .site-languages { padding-top: 20px; }
 
   .site-menu .btn {
     margin-top: 24px;

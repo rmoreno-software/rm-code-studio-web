@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue'
 import AppIcon from '@/components/ui/AppIcon.vue'
 import SectionHeader from '@/components/ui/SectionHeader.vue'
-import { SECTORS } from '@/content/sectors.js'
+import { SECTORS, SECTORS_SECTION } from '@/content/sectors.js'
 import { SECTION_IDS } from '@/content/navigation.js'
 import { useFlashOnChange } from '@/composables/useFlashOnChange.js'
 import { padNumber } from '@/utils/format.js'
@@ -21,9 +21,8 @@ function selectSector(index) {
 <template>
   <div class="container">
     <section :id="SECTION_IDS.sectors" class="section-anchor sectors">
-      <SectionHeader eyebrow="04 — Sectores y casos de uso" title="Soluciones para cualquier tipo de empresa">
-        Desde pymes y comercios hasta grandes organizaciones y sector público. Algunos ejemplos de lo que puedo
-        resolver:
+      <SectionHeader :eyebrow="SECTORS_SECTION.eyebrow" :title="SECTORS_SECTION.title">
+        {{ SECTORS_SECTION.intro }}
       </SectionHeader>
 
       <div class="sectors-layout">
@@ -64,10 +63,7 @@ function selectSector(index) {
         </div>
       </div>
 
-      <p class="sectors-note">
-        Si tu sector no aparece, no importa: los problemas de fondo (tiempo, errores, comunicación, datos) se
-        repiten en todas partes.
-      </p>
+      <p class="sectors-note">{{ SECTORS_SECTION.note }}</p>
     </section>
   </div>
 </template>

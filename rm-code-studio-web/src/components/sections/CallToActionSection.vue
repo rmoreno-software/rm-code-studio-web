@@ -1,6 +1,9 @@
 <script setup>
 import AppIcon from '@/components/ui/AppIcon.vue'
 import { PRIMARY_CTA } from '@/content/navigation.js'
+import { CALL_TO_ACTION } from '@/content/hero.js'
+
+const LINE_STAGGER_MS = 100
 </script>
 
 <template>
@@ -8,10 +11,14 @@ import { PRIMARY_CTA } from '@/content/navigation.js'
     <div class="cta-grid" aria-hidden="true"></div>
     <div class="container cta-inner">
       <p class="cta-message">
-        <span data-reveal="up" class="cta-line">Si un proceso te cuesta</span>
-        <span data-reveal="up" data-delay="100" class="cta-line">tiempo, dinero o clientes,</span>
-        <span data-reveal="up" data-delay="200" class="cta-line">probablemente tiene solución.</span>
-        <span data-reveal="up" data-delay="320" class="cta-line cta-line-emphasis">Hablemos.</span>
+        <span
+          v-for="(line, index) in CALL_TO_ACTION.lines"
+          :key="line"
+          data-reveal="up"
+          :data-delay="index * LINE_STAGGER_MS"
+          class="cta-line"
+        >{{ line }}</span>
+        <span data-reveal="up" data-delay="320" class="cta-line cta-line-emphasis">{{ CALL_TO_ACTION.emphasis }}</span>
       </p>
       <a data-reveal="up" data-delay="420" class="btn btn-ghost btn-cta cta-button" :href="PRIMARY_CTA.href">
         {{ PRIMARY_CTA.label }} <AppIcon name="arrow" :size="18" />

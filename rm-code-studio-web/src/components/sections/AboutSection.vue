@@ -1,7 +1,7 @@
 <script setup>
 import BulletList from '@/components/ui/BulletList.vue'
 import SectionEyebrow from '@/components/ui/SectionEyebrow.vue'
-import { ABOUT_FACTS } from '@/content/about.js'
+import { ABOUT_FACTS, ABOUT_SECTION } from '@/content/about.js'
 import { SECTION_IDS } from '@/content/navigation.js'
 
 const REVEAL_STAGGER_MS = 100
@@ -17,27 +17,26 @@ function hideBrokenImage(event) {
     <section :id="SECTION_IDS.about" class="section-anchor about">
       <div class="about-visual">
         <figure data-reveal="left" class="portrait">
-          <img src="/retrato-roger.jpg" alt="Retrato de Roger Moreno" class="grayscale portrait-image" @error="hideBrokenImage">
+          <img src="/retrato-roger.jpg" :alt="ABOUT_SECTION.portraitAlt" class="grayscale portrait-image" @error="hideBrokenImage">
           <span class="portrait-accent" aria-hidden="true"></span>
         </figure>
 
         <div class="profile-blocks">
-          <div data-reveal="left" data-delay="200" class="profile-block profile-business">Negocio<br>MBA</div>
-          <div data-reveal="right" data-delay="200" class="profile-block profile-software">Software<br>Ingeniería</div>
-          <div data-reveal="scale" data-delay="700" class="profile-overlap">Doble mirada</div>
+          <div data-reveal="left" data-delay="200" class="profile-block profile-business">
+            {{ ABOUT_SECTION.business[0] }}<br>{{ ABOUT_SECTION.business[1] }}
+          </div>
+          <div data-reveal="right" data-delay="200" class="profile-block profile-software">
+            {{ ABOUT_SECTION.software[0] }}<br>{{ ABOUT_SECTION.software[1] }}
+          </div>
+          <div data-reveal="scale" data-delay="700" class="profile-overlap">{{ ABOUT_SECTION.overlap }}</div>
         </div>
       </div>
 
       <div class="about-copy">
-        <SectionEyebrow data-reveal="up">02 — Sobre mí</SectionEyebrow>
-        <h2 data-reveal="up" data-delay="80" class="section-title about-title">Hola, soy Roger.</h2>
-        <p data-reveal="up" data-delay="160" class="about-lead">
-          Hola, soy Roger.
-          Ingeniero informático especializado en software y MBA. Ayudo a empresas a resolver problemas reales con tecnología: menos tareas manuales, sistemas conectados y herramientas que su equipo usa de verdad.
-        </p>
-        <p data-reveal="up" data-delay="200" class="about-text">
-          Me ocupo del proyecto de principio a fin, desde el análisis y la propuesta hasta el desarrollo y la puesta en marcha. Mi regla es sencilla: escuchar primero, proponer después, y no complicar lo que puede ser simple.
-        </p>
+        <SectionEyebrow data-reveal="up">{{ ABOUT_SECTION.eyebrow }}</SectionEyebrow>
+        <h2 data-reveal="up" data-delay="80" class="section-title about-title">{{ ABOUT_SECTION.title }}</h2>
+        <p data-reveal="up" data-delay="160" class="about-lead">{{ ABOUT_SECTION.lead }}</p>
+        <p data-reveal="up" data-delay="200" class="about-text">{{ ABOUT_SECTION.text }}</p>
 
         <div class="about-facts">
           <div

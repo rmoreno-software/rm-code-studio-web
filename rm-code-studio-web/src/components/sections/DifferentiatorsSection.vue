@@ -1,6 +1,6 @@
 <script setup>
 import SectionEyebrow from '@/components/ui/SectionEyebrow.vue'
-import { DIFFERENTIATORS } from '@/content/differentiators.js'
+import { DIFFERENTIATORS, DIFFERENTIATORS_SECTION } from '@/content/differentiators.js'
 import { padNumber } from '@/utils/format.js'
 
 const ITEMS_PER_ROW = 3
@@ -10,8 +10,8 @@ const REVEAL_STAGGER_MS = 100
 <template>
   <div class="container">
     <section class="differentiators">
-      <SectionEyebrow data-reveal="up">05 — Por qué trabajar conmigo</SectionEyebrow>
-      <h2 data-reveal="up" data-delay="80" class="section-title">Lo que me diferencia</h2>
+      <SectionEyebrow data-reveal="up">{{ DIFFERENTIATORS_SECTION.eyebrow }}</SectionEyebrow>
+      <h2 data-reveal="up" data-delay="80" class="section-title">{{ DIFFERENTIATORS_SECTION.title }}</h2>
 
       <div class="differentiator-grid">
         <div

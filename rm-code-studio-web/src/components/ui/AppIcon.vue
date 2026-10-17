@@ -21,6 +21,12 @@ defineProps({
     <template v-if="name === 'arrow'">
       <path d="M5 12h14M13 6l6 6-6 6" />
     </template>
+    <template v-else-if="name === 'external'">
+      <path d="M7 17L17 7M8 7h9v9" />
+    </template>
+    <template v-else-if="name === 'arrow-left'">
+      <path d="M19 12H5M11 6l-6 6 6 6" />
+    </template>
     <template v-else-if="name === 'check'">
       <path d="M4 12l5 5L20 6" />
     </template>

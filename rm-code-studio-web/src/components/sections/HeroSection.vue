@@ -3,28 +3,34 @@ import AppIcon from '@/components/ui/AppIcon.vue'
 import SectionEyebrow from '@/components/ui/SectionEyebrow.vue'
 import HeroDiagram from '@/components/graphics/HeroDiagram.vue'
 import { PRIMARY_CTA, SECTION_IDS } from '@/content/navigation.js'
+import { HERO } from '@/content/hero.js'
+
+const LINE_STAGGER_MS = 80
 </script>
 
 <template>
   <div class="container">
     <section class="hero">
       <div class="hero-copy">
-        <SectionEyebrow data-reveal="up" :marker="false">Consultoría tecnológica · Software · IA</SectionEyebrow>
+        <SectionEyebrow data-reveal="up" :marker="false">{{ HERO.eyebrow }}</SectionEyebrow>
         <h1 class="hero-title">
-          <span data-reveal="up" data-delay="80" class="hero-title-line">Tecnología</span>
-          <span data-reveal="up" data-delay="160" class="hero-title-line">que resuelve</span>
-          <span data-reveal="up" data-delay="240" class="hero-title-line">problemas de <span class="text-accent">negocio.</span></span>
+          <span
+            v-for="(line, index) in HERO.titleLines"
+            :key="line"
+            data-reveal="up"
+            :data-delay="(index + 1) * LINE_STAGGER_MS"
+            class="hero-title-line"
+          >
+            {{ line }}
+            <span v-if="index === HERO.titleLines.length - 1" class="text-accent">{{ HERO.titleAccent }}</span>
+          </span>
         </h1>
-        <p data-reveal="up" data-delay="360" class="hero-lead">
-          Consultoría informática, desarrollo de software, integraciones e inteligencia artificial para empresas
-          que quieren trabajar mejor, vender más y perder menos tiempo. Un solo interlocutor, de la estrategia
-          a la puesta en marcha.
-        </p>
+        <p data-reveal="up" data-delay="360" class="hero-lead">{{ HERO.lead }}</p>
         <div data-reveal="up" data-delay="460" class="hero-actions">
           <a class="btn btn-primary btn-cta" :href="PRIMARY_CTA.href">
             {{ PRIMARY_CTA.label }} <AppIcon name="arrow" :size="18" />
           </a>
-          <a class="btn btn-ghost" :href="`#${SECTION_IDS.services}`">Ver servicios</a>
+          <a class="btn btn-ghost" :href="`#${SECTION_IDS.services}`">{{ HERO.secondaryCta }}</a>
         </div>
       </div>
 
