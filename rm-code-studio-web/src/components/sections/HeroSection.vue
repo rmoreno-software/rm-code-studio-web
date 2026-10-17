@@ -1,0 +1,75 @@
+<script setup>
+import AppIcon from '@/components/ui/AppIcon.vue'
+import SectionEyebrow from '@/components/ui/SectionEyebrow.vue'
+import HeroDiagram from '@/components/graphics/HeroDiagram.vue'
+import { PRIMARY_CTA, SECTION_IDS } from '@/content/navigation.js'
+</script>
+
+<template>
+  <div class="container">
+    <section class="hero">
+      <div class="hero-copy">
+        <SectionEyebrow data-reveal="up" :marker="false">Consultoría tecnológica · Software · IA</SectionEyebrow>
+        <h1 class="hero-title">
+          <span data-reveal="up" data-delay="80" class="hero-title-line">Tecnología</span>
+          <span data-reveal="up" data-delay="160" class="hero-title-line">que resuelve</span>
+          <span data-reveal="up" data-delay="240" class="hero-title-line">problemas de <span class="text-accent">negocio.</span></span>
+        </h1>
+        <p data-reveal="up" data-delay="360" class="hero-lead">
+          Consultoría informática, desarrollo de software, integraciones e inteligencia artificial para empresas
+          que quieren trabajar mejor, vender más y perder menos tiempo. Un solo interlocutor, de la estrategia
+          a la puesta en marcha.
+        </p>
+        <div data-reveal="up" data-delay="460" class="hero-actions">
+          <a class="btn btn-primary btn-cta" :href="PRIMARY_CTA.href">
+            {{ PRIMARY_CTA.label }} <AppIcon name="arrow" :size="18" />
+          </a>
+          <a class="btn btn-ghost" :href="`#${SECTION_IDS.services}`">Ver servicios</a>
+        </div>
+      </div>
+
+      <HeroDiagram data-reveal="scale" data-delay="200" />
+    </section>
+  </div>
+</template>
+
+<style scoped>
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 56px clamp(32px, 5vw, 80px);
+  padding: clamp(56px, 8vw, 112px) 0 clamp(56px, 8vw, 96px);
+}
+
+.hero-copy {
+  flex: 1 1 480px;
+  min-width: 0;
+}
+
+.hero-title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(44px, 6.4vw, 96px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin: 28px 0 0 -0.05em;
+}
+
+.hero-title-line { display: block; }
+
+.hero-lead {
+  font-size: 19px;
+  line-height: 30px;
+  max-width: 54ch;
+  margin: 36px 0 0;
+  opacity: 0.85;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 36px;
+}
+</style>

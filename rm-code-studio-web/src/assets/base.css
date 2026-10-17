@@ -1,0 +1,6 @@
+html { scroll-behavior: smooth; }
+body { margin: 0; text-wrap: pretty; background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); overflow-x: hidden; }
+a { color: inherit; text-decoration-color: var(--color-accent); text-underline-offset: 3px; }
+a:hover { color: var(--color-accent-700); }
+a.btn { text-decoration: none; }
+.nav a.btn-primary, a.btn-primary, a.btn-primary:hover { color: var(--color-bg); }
