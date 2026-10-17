@@ -2,8 +2,8 @@
 import { ref } from 'vue'
 import AppIcon from '@/components/ui/AppIcon.vue'
 import SectionEyebrow from '@/components/ui/SectionEyebrow.vue'
-import { CONTACT_DETAILS } from '@/content/contact.js'
 import { LEGAL_LINKS, SECTION_IDS } from '@/content/navigation.js'
+import { CONTACT, CONTACT_DETAILS } from '@/content/contact.js'
 
 const FORM_FIELDS = [
   { id: 'f-nombre', name: 'nombre', label: 'Nombre', autocomplete: 'name', required: true },
@@ -13,10 +13,30 @@ const FORM_FIELDS = [
 ]
 
 const isSent = ref(false)
+const isSending = ref(false)
+const errorMessage = ref('')
 
-function handleSubmit() {
-  // TODO: enviar el formulario a tu backend o a un servicio de email (Formspree, EmailJS…)
-  isSent.value = true
+async function handleSubmit(event) {
+  const form = event.target
+  isSending.value = true
+  errorMessage.value = ''
+
+  try {
+    const response = await fetch(CONTACT.formEndpoint, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { Accept: 'application/json' }
+    })
+
+    if (!response.ok) throw new Error(`HTTP ${response.status}`)
+
+    form.reset()
+    isSent.value = true
+  } catch {
+    errorMessage.value = `No se ha podido enviar. Inténtalo de nuevo o escríbeme a ${CONTACT.email}.`
+  } finally {
+    isSending.value = false
+  }
 }
 
 function resetForm() {
@@ -55,6 +75,9 @@ function resetForm() {
         </div>
 
         <form v-else class="contact-form" @submit.prevent="handleSubmit">
+          <input type="hidden" name="_subject" value="Nueva consulta desde la web">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none">
+
           <div class="contact-fields">
             <div v-for="field in FORM_FIELDS" :key="field.id" class="field">
               <label :for="field.id">{{ field.label }}</label>
@@ -73,11 +96,12 @@ function resetForm() {
             <textarea id="f-msg" class="input contact-message" name="mensaje" rows="5" required></textarea>
           </div>
           <label class="consent">
-            <input type="checkbox" required>
+            <input type="checkbox" name="consentimiento" value="Acepta la política de privacidad" required>
             <span>He leído y acepto la <a :href="LEGAL_LINKS.privacy.href">política de privacidad</a>.</span>
           </label>
-          <button type="submit" class="btn btn-primary btn-cta contact-submit">
-            Enviar consulta <AppIcon name="arrow" :size="18" />
+          <p v-if="errorMessage" class="contact-error" role="alert">{{ errorMessage }}</p>
+          <button type="submit" class="btn btn-primary btn-cta contact-submit" :disabled="isSending">
+            {{ isSending ? 'Enviando…' : 'Enviar consulta' }} <AppIcon name="arrow" :size="18" />
           </button>
         </form>
       </div>
@@ -173,6 +197,14 @@ function resetForm() {
 }
 
 .contact-submit { justify-self: start; }
+
+.contact-error {
+  margin: 0;
+  color: var(--color-accent);
+  font-size: 14.5px;
+  font-weight: 700;
+}
+.contact-submit:disabled { opacity: 0.6; cursor: wait; }
 
 /* — mensaje de confirmación — */
 .contact-success {

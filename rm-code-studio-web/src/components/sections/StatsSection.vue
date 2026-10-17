@@ -18,7 +18,7 @@ const responseHours = computed(() =>
 const stats = computed(() => [
   {
     value: `+${formatCount(config.years, progress.value)}`,
-    label: 'Años de experiencia en entornos corporativos y sector público'
+    label: 'Años de experiencia en entornos profesionales'
   },
   {
     value: `+${formatCount(config.projects, progress.value)}`,

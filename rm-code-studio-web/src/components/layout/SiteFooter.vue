@@ -1,6 +1,7 @@
 <script setup>
 import { CONTACT } from '@/content/contact.js'
 import { LEGAL_LINKS } from '@/content/navigation.js'
+import BrandLogo from '@/components/ui/BrandLogo.vue'
 
 const currentYear = new Date().getFullYear()
 </script>
@@ -10,7 +11,7 @@ const currentYear = new Date().getFullYear()
     <div class="container footer-main">
       <div class="footer-identity">
         <span class="footer-brand">
-          <span class="footer-brand-mark" aria-hidden="true"></span>Roger Moreno
+          <BrandLogo :size="20" class="footer-brand-mark" /> Roger Moreno
         </span>
         <span class="footer-tagline">Consultoría tecnológica y desarrollo de software</span>
       </div>
@@ -56,9 +57,7 @@ const currentYear = new Date().getFullYear()
 }
 
 .footer-brand-mark {
-  width: 12px;
-  height: 12px;
-  background: var(--color-accent);
+  color: var(--color-accent);
 }
 
 .footer-tagline { opacity: 0.75; }

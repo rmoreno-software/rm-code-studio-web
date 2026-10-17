@@ -3,6 +3,7 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 import AppIcon from '@/components/ui/AppIcon.vue'
 import { NAV_LINKS, PRIMARY_CTA } from '@/content/navigation.js'
 import { useScrollProgress } from '@/composables/useScrollProgress.js'
+import BrandLogo from '@/components/ui/BrandLogo.vue'
 
 // Debe coincidir con el @media del <style> de abajo
 const COMPACT_MENU_QUERY = '(max-width: 1023px)'
@@ -40,7 +41,9 @@ onBeforeUnmount(() => {
 <template>
   <nav class="nav site-nav" :class="{ 'is-open': isMenuOpen }">
     <span class="nav-brand brand">
-      <span class="brand-mark" aria-hidden="true"></span>Roger Moreno
+      <a href="#" class="nav-brand brand">
+        <BrandLogo :size="22" class="brand-mark" />Roger Moreno
+      </a>
     </span>
 
     <button
@@ -81,12 +84,7 @@ onBeforeUnmount(() => {
   gap: 10px;
 }
 
-.brand-mark {
-  flex: none;
-  width: 14px;
-  height: 14px;
-  background: var(--color-accent);
-}
+.brand-mark { color: var(--color-accent); }
 
 .site-menu { display: contents; }
 

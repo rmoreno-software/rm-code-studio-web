@@ -32,14 +32,11 @@ function hideBrokenImage(event) {
         <SectionEyebrow data-reveal="up">02 — Sobre mí</SectionEyebrow>
         <h2 data-reveal="up" data-delay="80" class="section-title about-title">Hola, soy Roger.</h2>
         <p data-reveal="up" data-delay="160" class="about-lead">
-          Soy ingeniero informático, especializado en ingeniería del software, y tengo un MBA. He pasado buena
-          parte de mi carrera como responsable de sistemas en organizaciones con exigencias altas de seguridad,
-          disponibilidad e integración con administraciones públicas.
+          Hola, soy Roger.
+          Ingeniero informático especializado en software y MBA. Ayudo a empresas a resolver problemas reales con tecnología: menos tareas manuales, sistemas conectados y herramientas que su equipo usa de verdad.
         </p>
         <p data-reveal="up" data-delay="200" class="about-text">
-          En ese tiempo he coordinado proveedores, he diseñado sistemas y también he programado muchas de las
-          soluciones que necesitábamos. De ahí aprendí a escuchar primero y proponer después, y es lo que
-          intento aportar en cada proyecto.
+          Me ocupo del proyecto de principio a fin, desde el análisis y la propuesta hasta el desarrollo y la puesta en marcha. Mi regla es sencilla: escuchar primero, proponer después, y no complicar lo que puede ser simple.
         </p>
 
         <div class="about-facts">
