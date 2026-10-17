@@ -1,0 +1,9 @@
+// Despliegue en Cloudflare Workers: solo archivos estáticos (lo que genera `npm run build` en dist/).
+// `name` debe coincidir con el nombre del Worker en el panel de Cloudflare.
+{
+  "name": "rm-code-studio-web",
+  "compatibility_date": "2025-09-01",
+  "assets": {
+    "directory": "./dist"
+  }
+}
